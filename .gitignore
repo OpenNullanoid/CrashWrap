@@ -175,3 +175,6 @@ CrashWrapUI.py
 *.x86_32
 *.bin
 *.elf
+
+# Visual Studio Code configuration
+.vscode
