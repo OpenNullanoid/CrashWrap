@@ -7,6 +7,7 @@ import copy
 from datetime import datetime
 
 # Responsible for providing variables for runtime of this program
+from ProgramVars import *
 from HandlerVars import *
 
 # Qt Libraries
@@ -26,7 +27,9 @@ class CrashHandlerUi(QDialog):
         super().__init__(parent)
         self.ui = Ui_CrashHandler()
         self.ui.setupUi(self)
-
+        
+        # UI Configuration
+        self.setWindowTitle(f"{ProductName} has encountered a runtime error")
         self.ui.LogViewer.setFont(QFontDatabase.systemFont(QFontDatabase.FixedFont))
 
         self.ui.ExitButton.clicked.connect(sys.exit)  # Connects the exit button to exit fucnction
@@ -34,8 +37,8 @@ class CrashHandlerUi(QDialog):
         self.ui.RestartButton.clicked.connect(self.restart_program)
         self.ui.LogsButton.clicked.connect(self.open_logs_folder)
 
+    # Configure the messages before showing the window to the user.
     def show_window(self, main_error, sub_error, logs):
-        self.setWindowTitle(f"{ProductName} has encountered a runtime error")
         self.ui.MainErrorLabel.setText(main_error)  # Display main error information
         self.ui.SubErrorLabel.setText(sub_error)  # Display explanation of the error
         self.ui.LogViewer.setPlainText(logs)  # Display logs to the user
